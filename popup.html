@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="bn">
+<head>
+  <meta charset="UTF-8">
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Inter, system-ui, -apple-system, sans-serif;
+    }
+    body {
+      width: 360px;
+      max-height: 520px;
+      overflow-y: auto;
+      background: linear-gradient(165deg, #062b68 0%, #0755b9 28%, #1683df 58%, #7ac8ff 100%);
+      color: #fff;
+      padding: 12px;
+    }
+    body::-webkit-scrollbar { width: 5px; }
+    body::-webkit-scrollbar-thumb { background: rgba(255,255,255,.35); border-radius: 10px; }
+    .brand { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
+    .logo { font-size: 18px; font-weight: 900; }
+    .version { padding: 3px 7px; border-radius: 12px; font-size: 9px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.18); }
+    .section { margin-bottom: 10px; border-radius: 12px; background: rgba(2,31,77,.35); border: 1px solid rgba(255,255,255,.15); padding: 10px; }
+    .section-title { font-size: 11px; font-weight: 900; letter-spacing: 1px; margin-bottom: 8px; color: #b9edff; }
+    .control { padding: 6px 0; }
+    .label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px; }
+    input[type=range] { width: 100%; height: 4px; appearance: none; border-radius: 10px; background: rgba(255,255,255,.2); outline: none; }
+    input[type=range]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; cursor: pointer; }
+    .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
+    .mode { padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,.14); color: white; background: rgba(0,0,0,.2); cursor: pointer; font-size: 10px; font-weight: 800; }
+    .mode.active { background: rgba(255,255,255,.3); border-color: rgba(255,255,255,.5); }
+  </style>
+</head>
+<body>
+  <div class="brand">
+    <div class="logo">THALVRIX</div>
+    <div class="version">v1.0</div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">ENGINE</div>
+    <div class="control">
+      <div class="label"><span>Input</span><span id="val-input">1.00x</span></div>
+      <input type="range" id="input" min="0" max="2" step="0.01" value="1">
+    </div>
+    <div class="control">
+      <div class="label"><span>Output</span><span id="val-output">85%</span></div>
+      <input type="range" id="output" min="0" max="1" step="0.01" value="0.85">
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">VOICE & EQ</div>
+    <div class="control">
+      <div class="label"><span>Bass</span><span id="val-bass">0 dB</span></div>
+      <input type="range" id="bass" min="-12" max="12" step="0.1" value="0">
+    </div>
+    <div class="control">
+      <div class="label"><span>Treble</span><span id="val-treble">0 dB</span></div>
+      <input type="range" id="treble" min="-12" max="12" step="0.1" value="0">
+    </div>
+  </div>
+
+  <div class="section">
+    <div class="section-title">VOICE MODES</div>
+    <div class="mode-grid">
+      <button class="mode" data-mode="robot">🤖 Robot</button>
+      <button class="mode" data-mode="deep">🎙 Deep</button>
+      <button class="mode" data-mode="radio">📻 Radio</button>
+      <button class="mode" data-mode="alien">👽 Alien</button>
+    </div>
+  </div>
+
+  <script src="popup.js"></script>
+</body>
+</html>
