@@ -9,67 +9,333 @@
       padding: 0;
       font-family: Inter, system-ui, -apple-system, sans-serif;
     }
+
     body {
-      width: 360px;
-      max-height: 520px;
+      width: 380px;
+      max-height: 580px;
       overflow-y: auto;
       background: linear-gradient(165deg, #062b68 0%, #0755b9 28%, #1683df 58%, #7ac8ff 100%);
       color: #fff;
-      padding: 12px;
+      padding: 14px;
     }
-    body::-webkit-scrollbar { width: 5px; }
-    body::-webkit-scrollbar-thumb { background: rgba(255,255,255,.35); border-radius: 10px; }
-    .brand { display: flex; justify-content: space-between; align-items: center; margin-bottom: 12px; }
-    .logo { font-size: 18px; font-weight: 900; }
-    .version { padding: 3px 7px; border-radius: 12px; font-size: 9px; background: rgba(255,255,255,.14); border: 1px solid rgba(255,255,255,.18); }
-    .section { margin-bottom: 10px; border-radius: 12px; background: rgba(2,31,77,.35); border: 1px solid rgba(255,255,255,.15); padding: 10px; }
-    .section-title { font-size: 11px; font-weight: 900; letter-spacing: 1px; margin-bottom: 8px; color: #b9edff; }
-    .control { padding: 6px 0; }
-    .label { display: flex; justify-content: space-between; font-size: 11px; font-weight: 700; margin-bottom: 4px; }
-    input[type=range] { width: 100%; height: 4px; appearance: none; border-radius: 10px; background: rgba(255,255,255,.2); outline: none; }
-    input[type=range]::-webkit-slider-thumb { appearance: none; width: 14px; height: 14px; border-radius: 50%; background: #fff; cursor: pointer; }
-    .mode-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 6px; }
-    .mode { padding: 8px; border-radius: 8px; border: 1px solid rgba(255,255,255,.14); color: white; background: rgba(0,0,0,.2); cursor: pointer; font-size: 10px; font-weight: 800; }
-    .mode.active { background: rgba(255,255,255,.3); border-color: rgba(255,255,255,.5); }
+
+    body::-webkit-scrollbar {
+      width: 5px;
+    }
+
+    body::-webkit-scrollbar-thumb {
+      background: rgba(255,255,255,.35);
+      border-radius: 10px;
+    }
+
+    .brand {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .logo {
+      font-size: 20px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+    }
+
+    .sub {
+      font-size: 10px;
+      color: rgba(255,255,255,.7);
+    }
+
+    .version {
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 9px;
+      font-weight: 800;
+      background: rgba(255,255,255,.14);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+
+    .section {
+      margin-bottom: 10px;
+      border-radius: 14px;
+      background: rgba(2,31,77,.3);
+      border: 1px solid rgba(255,255,255,.15);
+      overflow: hidden;
+    }
+
+    .section-head {
+      padding: 10px 12px;
+      font-size: 11px;
+      font-weight: 900;
+      letter-spacing: 1.2px;
+      color: #b9edff;
+      background: rgba(255,255,255,.05);
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .section-body {
+      padding: 10px 12px;
+    }
+
+    .control {
+      padding: 6px 0;
+    }
+
+    .label {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 4px;
+    }
+
+    .value {
+      color: rgba(255,255,255,.78);
+      font-size: 10px;
+      font-variant-numeric: tabular-nums;
+    }
+
+    input[type=range] {
+      width: 100%;
+      height: 4px;
+      appearance: none;
+      border-radius: 10px;
+      background: rgba(255,255,255,.2);
+      outline: none;
+    }
+
+    input[type=range]::-webkit-slider-thumb {
+      appearance: none;
+      width: 14px;
+      height: 14px;
+      border-radius: 50%;
+      background: #fff;
+      cursor: pointer;
+      box-shadow: 0 0 8px rgba(0,0,0,.3);
+    }
+
+    .mode-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+
+    .mode {
+      padding: 9px;
+      border-radius: 10px;
+      border: 1px solid rgba(255,255,255,.14);
+      color: white;
+      background: rgba(0,0,0,.18);
+      cursor: pointer;
+      font-size: 10px;
+      font-weight: 800;
+      text-align: center;
+      transition: background .15s ease;
+    }
+
+    .mode.active {
+      background: rgba(255,255,255,.3);
+      border-color: rgba(255,255,255,.5);
+    }
+
+    .switch-control {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 6px 0;
+      font-size: 11px;
+      font-weight: 700;
+    }
+
+    .switch {
+      width: 38px;
+      height: 20px;
+      padding: 2px;
+      border-radius: 20px;
+      background: rgba(0,0,0,.25);
+      cursor: pointer;
+    }
+
+    .switch i {
+      display: block;
+      width: 16px;
+      height: 16px;
+      border-radius: 50%;
+      background: white;
+      transition: transform .2s ease;
+    }
+
+    .switch.on {
+      background: rgba(255,255,255,.4);
+    }
+
+    .switch.on i {
+      transform: translateX(18px);
+    }
   </style>
 </head>
 <body>
+
   <div class="brand">
-    <div class="logo">THALVRIX</div>
+    <div>
+      <div class="logo">THALVRIX</div>
+      <div class="sub">Realtime Voice Processing Engine</div>
+    </div>
     <div class="version">v1.0</div>
   </div>
 
+  <!-- ENGINE -->
   <div class="section">
-    <div class="section-title">ENGINE</div>
-    <div class="control">
-      <div class="label"><span>Input</span><span id="val-input">1.00x</span></div>
-      <input type="range" id="input" min="0" max="2" step="0.01" value="1">
-    </div>
-    <div class="control">
-      <div class="label"><span>Output</span><span id="val-output">85%</span></div>
-      <input type="range" id="output" min="0" max="1" step="0.01" value="0.85">
+    <div class="section-head">◉ ENGINE</div>
+    <div class="section-body">
+      <div class="control">
+        <div class="label"><span>Input</span><span class="value" id="val-input">1.00x</span></div>
+        <input type="range" id="input" min="0" max="2" step="0.01" value="1">
+      </div>
+      <div class="control">
+        <div class="label"><span>Output</span><span class="value" id="val-output">85%</span></div>
+        <input type="range" id="output" min="0" max="1" step="0.01" value="0.85">
+      </div>
     </div>
   </div>
 
+  <!-- VOICE -->
   <div class="section">
-    <div class="section-title">VOICE & EQ</div>
-    <div class="control">
-      <div class="label"><span>Bass</span><span id="val-bass">0 dB</span></div>
-      <input type="range" id="bass" min="-12" max="12" step="0.1" value="0">
-    </div>
-    <div class="control">
-      <div class="label"><span>Treble</span><span id="val-treble">0 dB</span></div>
-      <input type="range" id="treble" min="-12" max="12" step="0.1" value="0">
+    <div class="section-head">♫ VOICE</div>
+    <div class="section-body">
+      <div class="control">
+        <div class="label"><span>Bass</span><span class="value" id="val-bass">0 dB</span></div>
+        <input type="range" id="bass" min="-12" max="12" step="0.1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Mid</span><span class="value" id="val-mid">0 dB</span></div>
+        <input type="range" id="mid" min="-12" max="12" step="0.1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Treble</span><span class="value" id="val-treble">0 dB</span></div>
+        <input type="range" id="treble" min="-12" max="12" step="0.1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Clarity</span><span class="value" id="val-clarity">0 dB</span></div>
+        <input type="range" id="clarity" min="0" max="12" step="0.1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Presence</span><span class="value" id="val-presence">0 dB</span></div>
+        <input type="range" id="presence" min="0" max="12" step="0.1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Compressor</span><span class="value" id="val-compressor">0%</span></div>
+        <input type="range" id="compressor" min="0" max="100" step="1" value="0">
+      </div>
     </div>
   </div>
 
+  <!-- VOICE MODES -->
   <div class="section">
-    <div class="section-title">VOICE MODES</div>
-    <div class="mode-grid">
-      <button class="mode" data-mode="robot">🤖 Robot</button>
-      <button class="mode" data-mode="deep">🎙 Deep</button>
-      <button class="mode" data-mode="radio">📻 Radio</button>
-      <button class="mode" data-mode="alien">👽 Alien</button>
+    <div class="section-head">◈ VOICE MODES</div>
+    <div class="section-body">
+      <div class="mode-grid">
+        <button class="mode" data-mode="robot">🤖 Robot</button>
+        <button class="mode" data-mode="deep">🎙 Deep Voice</button>
+        <button class="mode" data-mode="radio">📻 Radio</button>
+        <button class="mode" data-mode="alien">👽 Alien</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- SPACE -->
+  <div class="section">
+    <div class="section-head">◇ SPACE</div>
+    <div class="section-body">
+      <div class="control">
+        <div class="label"><span>Reverb</span><span class="value" id="val-reverb">0%</span></div>
+        <input type="range" id="reverb" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Echo</span><span class="value" id="val-echo">0%</span></div>
+        <input type="range" id="echo" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Room Size</span><span class="value" id="val-room">0%</span></div>
+        <input type="range" id="room" min="0" max="100" step="1" value="0">
+      </div>
+    </div>
+  </div>
+
+  <!-- STEREO -->
+  <div class="section">
+    <div class="section-head">↔ STEREO</div>
+    <div class="section-body">
+      <div class="control">
+        <div class="label"><span>Stereo Width</span><span class="value" id="val-stereoWidth">0%</span></div>
+        <input type="range" id="stereoWidth" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Haas</span><span class="value" id="val-haas">0 ms</span></div>
+        <input type="range" id="haas" min="0" max="40" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Pan</span><span class="value" id="val-pan">0%</span></div>
+        <input type="range" id="pan" min="-100" max="100" step="1" value="0">
+      </div>
+    </div>
+  </div>
+
+  <!-- CHARACTER -->
+  <div class="section">
+    <div class="section-head">△ CHARACTER</div>
+    <div class="section-body">
+      <div class="control">
+        <div class="label"><span>Saturation</span><span class="value" id="val-saturation">0%</span></div>
+        <input type="range" id="saturation" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Distortion</span><span class="value" id="val-distortion">0%</span></div>
+        <input type="range" id="distortion" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Bit Crush</span><span class="value" id="val-bitcrush">0%</span></div>
+        <input type="range" id="bitcrush" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>De-Esser</span><span class="value" id="val-deEsser">0%</span></div>
+        <input type="range" id="deEsser" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Noise Gate</span><span class="value" id="val-noiseGate">0%</span></div>
+        <input type="range" id="noiseGate" min="0" max="100" step="1" value="0">
+      </div>
+    </div>
+  </div>
+
+  <!-- EXTRAS -->
+  <div class="section">
+    <div class="section-head">✦ EXTRAS</div>
+    <div class="section-body">
+      <div class="switch-control">
+        <span>Auto Pan</span>
+        <div class="switch" id="autoPan"><i></i></div>
+      </div>
+      <div class="control">
+        <div class="label"><span>Robot Amount</span><span class="value" id="val-robot">0%</span></div>
+        <input type="range" id="robot" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Deep Voice</span><span class="value" id="val-deep">0%</span></div>
+        <input type="range" id="deep" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Radio</span><span class="value" id="val-radio">0%</span></div>
+        <input type="range" id="radio" min="0" max="100" step="1" value="0">
+      </div>
+      <div class="control">
+        <div class="label"><span>Alien</span><span class="value" id="val-alien">0%</span></div>
+        <input type="range" id="alien" min="0" max="100" step="1" value="0">
+      </div>
     </div>
   </div>
 
