@@ -17,20 +17,39 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (label) {
         if (key === "input") label.textContent = val.toFixed(2) + "x";
-        else if (key === "output") label.textContent = Math.round(val * 100) + "%";
-        else label.textContent = val + " dB";
+        else if (key === "haas") label.textContent = val + " ms";
+        else if (["bass", "mid", "treble", "clarity", "presence"].includes(key)) label.textContent = val + " dB";
+        else label.textContent = Math.round(val) + "%";
       }
 
       sendState(key, val);
     });
   });
 
+  // Mode Buttons
   document.querySelectorAll(".mode").forEach(btn => {
     btn.addEventListener("click", () => {
       btn.classList.toggle("active");
       const mode = btn.dataset.mode;
       const isActive = btn.classList.contains("active");
-      sendState(mode, isActive ? 100 : 0);
+      const val = isActive ? 100 : 0;
+      
+      const slider = document.getElementById(mode);
+      if (slider) {
+        slider.value = val;
+        slider.dispatchEvent(new Event("input"));
+      } else {
+        sendState(mode, val);
+      }
     });
   });
+
+  // Switch Control
+  const autoPan = document.getElementById("autoPan");
+  if (autoPan) {
+    autoPan.addEventListener("click", () => {
+      autoPan.classList.toggle("on");
+      sendState("autoPan", autoPan.classList.contains("on"));
+    });
+  }
 });
